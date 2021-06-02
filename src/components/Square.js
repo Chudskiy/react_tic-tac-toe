@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 
-const Square = ({nextValue, setNextValue}) => {
+const Square = ({isXNext, setIsXNext}) => {
     const [value, setValue] = useState('');
 
-    const step = nextValue ? 'X' : '0';
+    const step = isXNext ? 'X' : '0';
 
     const handleClick = () => {
         if (value) return;
 
         setValue(step);
-        setNextValue(!nextValue);
+        setIsXNext(!isXNext);
     }
 
     return (
