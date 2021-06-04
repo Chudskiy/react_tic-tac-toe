@@ -21,16 +21,16 @@ const Board = () => {
         setIsXNext(!isXNext);
 
 
-        if ((newSquares[0] !== null && newSquares[0] === newSquares[1] && newSquares[0] === newSquares[2]) ||
-            (newSquares[3] !== null && newSquares[3] === newSquares[4] && newSquares[3] === newSquares[5]) ||
-            (newSquares[6] !== null && newSquares[6] === newSquares[7] && newSquares[6] === newSquares[8]) ||
-            (newSquares[0] !== null && newSquares[0] === newSquares[3] && newSquares[0] === newSquares[6]) ||
-            (newSquares[1] !== null && newSquares[1] === newSquares[4] && newSquares[1] === newSquares[7]) ||
-            (newSquares[2] !== null && newSquares[2] === newSquares[5] && newSquares[2] === newSquares[8]) ||
-            (newSquares[0] !== null && newSquares[0] === newSquares[4] && newSquares[0] === newSquares[8]) ||
-            (newSquares[2] !== null && newSquares[2] === newSquares[4] && newSquares[2] === newSquares[6]))
-        {
-            console.log();
+        if (
+            (newSquares[0] && newSquares[0] === newSquares[1] && newSquares[0] === newSquares[2]) ||
+            (newSquares[3] && newSquares[3] === newSquares[4] && newSquares[3] === newSquares[5]) ||
+            (newSquares[6] && newSquares[6] === newSquares[7] && newSquares[6] === newSquares[8]) ||
+            (newSquares[0] && newSquares[0] === newSquares[3] && newSquares[0] === newSquares[6]) ||
+            (newSquares[1] && newSquares[1] === newSquares[4] && newSquares[1] === newSquares[7]) ||
+            (newSquares[2] && newSquares[2] === newSquares[5] && newSquares[2] === newSquares[8]) ||
+            (newSquares[0] && newSquares[0] === newSquares[4] && newSquares[0] === newSquares[8]) ||
+            (newSquares[2] && newSquares[2] === newSquares[4] && newSquares[2] === newSquares[6])
+        ) {
             setDisabled(true);
         }
     };
