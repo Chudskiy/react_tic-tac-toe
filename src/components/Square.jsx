@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Square = ({handleClick, item, index, disabled}) => {
+const Square = ({handleClick, item, index, subIndex, disabled}) => {
     return (
-        <button disabled={disabled} onClick={() => handleClick(index)} className='square'>
+        <button disabled={disabled} onClick={() => handleClick(index, subIndex)} className='square'>
             {item}
         </button>
     );
