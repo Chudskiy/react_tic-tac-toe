@@ -5,10 +5,10 @@ body {
 }
 
 .board {
-    /*width: 150px;*/
     margin: 50px;
     display: flex;
     flex-wrap: wrap;
+    border: 1px solid red;
 }
 
 .square {
@@ -24,4 +24,9 @@ body {
 
 .restart-button {
     margin: 20px 0;
+}
+
+input {
+    width: 50px;
+    margin: 0 7px;
 }
