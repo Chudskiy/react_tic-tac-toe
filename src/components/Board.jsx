@@ -1,41 +1,31 @@
 import React, {useState} from 'react';
 
 import Square from "./Square";
-import {DIAGONALLY, HORIZONTALLY, VERTICALLY} from "../constants";
-import {hasWinner} from "../functions/hasWinner";
 import BoardSizeForm from "../forms/BoardSizeForm";
+import {hasWinner} from "../functions/hasWinner";
+import {DIAGONALLY, HORIZONTALLY, VERTICALLY} from "../constants";
 
-// const board = Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill(null));
-
-const findWinner = (board, index, subIndex, value) => {
-    return [HORIZONTALLY, VERTICALLY, DIAGONALLY].some(key => hasWinner[key](board, index, subIndex, value))
-};
-
-
-//----------------------------------------------------------------------------------------------------------------------
 
 const Board = () => {
-    const [boardSize, setBoardSize] = useState(3);
-
+    const [boardSize, setBoardSize] = useState(0);
     const [isXNext, setIsXNext] = useState('0');
-    // const [squares, setSquares] = useState(board);
     const [squares, setSquares] = useState(Array(boardSize).fill(Array(boardSize).fill(null)));
     const [winner, setWinner] = useState(null);
     const [disabled, setDisabled] = useState(false);
+    const [boardWidth, setBoardWidth] = useState(`${boardSize * 50}px`);
 
-    const boardWidth = `${boardSize * 50}px`;
-    console.log('squares = ', squares);
+    const findWinner = (squares, index, subIndex, value) => {
+        return [HORIZONTALLY, VERTICALLY, DIAGONALLY].some(key => hasWinner[key](squares, index, subIndex, value, boardSize));
+    };
 
 
     const handleChangeBoardSize = (e) => {
         e.preventDefault();
 
-        setBoardSize(boardSize);
-        //
-        // setSquares(Array(boardSize).fill(Array(boardSize).fill(null)));
+        setBoardWidth(`${boardSize * 50}px`);
+        setSquares(Array(+boardSize).fill(Array(+boardSize).fill(null)));
     };
 
-    console.log('boardSize = ', boardSize);
 
 
     const handleClick = (index, subIndex) => {
@@ -56,12 +46,20 @@ const Board = () => {
         setDisabled(result)
     };
 
+
     return (
         <>
+            <button
+                style={{marginBottom: '20px', width: '600px'}}
+                onClick={() => document.location.reload()}>
+                Restart
+            </button>
+
             <BoardSizeForm
                 boardSize={boardSize}
                 setBoardSize={setBoardSize}
                 handleChangeBoardSize={handleChangeBoardSize}
+                winner={winner}
             />
 
             < div className='board' style={{width: boardWidth}}>
@@ -80,8 +78,6 @@ const Board = () => {
                 })}
             </div>
 
-            <button onClick={() => document.location.reload()}>Restart</button>
-
             {winner ? (<div>Winner: {winner}</div>) : null}
         </>
     );
@@ -90,36 +86,16 @@ const Board = () => {
 export default Board;
 
 
-
-
-
 // const board = (() => {
 //     return Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill(null))
 // })()
 
 
-
-// const [boardSize, setBoardSize] = useState(null);
-// const [boardWidth, setBoardWidth] = useState('');
-// const [boardHeight, setBoardHeight] = useState('');
-
-
-// {/*<BoardSizeForm*/}
-// {/*    boardSize={boardSize}*/}
-// {/*    setBoardSize={setBoardSize}*/}
-// {/*    handleChangeBoardSize={handleChangeBoardSize}*/}
-// {/*/>*/}
-
-
-// const handleChangeBoardSize = (e) => {
-//     e.preventDefault();
-//
-//     setBoardSize(boardSize);
-//
-//     setBoardWidth(`${boardSize * 50}px`);
-//
-//     console.log('boardSize = ', boardSize);
+// const findWinner = (squares, index, subIndex, value) => {
+//     return [HORIZONTALLY, VERTICALLY, DIAGONALLY].some(key => hasWinner[key](squares, index, subIndex, value, boardSize));
 // };
+
+
 
 
 

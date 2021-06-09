@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import * as yup from 'yup';
 
-const BoardSizeForm = ({boardSize, setBoardSize, handleChangeBoardSize}) => {
+const BoardSizeForm = ({boardSize, setBoardSize, handleChangeBoardSize, winner}) => {
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -39,7 +39,7 @@ const BoardSizeForm = ({boardSize, setBoardSize, handleChangeBoardSize}) => {
                     onChange={e => setBoardSize(e.target.value)}
                 />
 
-                <button>Change</button>
+                {!winner && <button>Change</button>}
             </form>
         </>
     );
