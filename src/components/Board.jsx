@@ -2,17 +2,17 @@ import React, {useState} from 'react';
 
 import Square from "./Square";
 import BoardSizeForm from "../forms/BoardSizeForm";
-import {hasWinner} from "../functions/hasWinner";
-import {DIAGONALLY, HORIZONTALLY, VERTICALLY} from "../constants";
+import {hasWinner} from "../utils/hasWinner";
+import {BOARD_SIZE, DIAGONALLY, HORIZONTALLY, VERTICALLY} from "../constants";
 
 
 const Board = () => {
-    const [boardSize, setBoardSize] = useState(0);
-    const [isXNext, setIsXNext] = useState('0');
+    const [boardSize, setBoardSize] = useState(BOARD_SIZE);
+    const [isXNext, setIsXNext] = useState(true);
     const [squares, setSquares] = useState(Array(boardSize).fill(Array(boardSize).fill(null)));
     const [winner, setWinner] = useState(null);
     const [disabled, setDisabled] = useState(false);
-    const [boardWidth, setBoardWidth] = useState(`${boardSize * 50}px`);
+    const [boardWidth, setBoardWidth] = useState(`${boardSize * 50}`);
 
     const findWinner = (squares, index, subIndex, value) => {
         return [HORIZONTALLY, VERTICALLY, DIAGONALLY].some(key => hasWinner[key](squares, index, subIndex, value, boardSize));
@@ -22,10 +22,9 @@ const Board = () => {
     const handleChangeBoardSize = (e) => {
         e.preventDefault();
 
-        setBoardWidth(`${boardSize * 50}px`);
+        setBoardWidth(`${boardSize * 50}`);
         setSquares(Array(+boardSize).fill(Array(+boardSize).fill(null)));
     };
-
 
 
     const handleClick = (index, subIndex) => {
@@ -50,7 +49,7 @@ const Board = () => {
     return (
         <>
             <button
-                style={{marginBottom: '20px', width: '600px'}}
+                style={{marginBottom: '20px', width: '200px'}}
                 onClick={() => document.location.reload()}>
                 Restart
             </button>
@@ -62,10 +61,9 @@ const Board = () => {
                 winner={winner}
             />
 
-            < div className='board' style={{width: boardWidth}}>
-                {squares.map((row, index) => {
-                    // console.log(row)
-                    return row.map((square, subIndex) => (
+            < div className='board' style={{width: boardWidth + 'px'}}>
+                {squares.map((row, index) => (
+                    row.map((square, subIndex) => (
                         <Square
                             key={subIndex}
                             index={index}
@@ -75,10 +73,10 @@ const Board = () => {
                             disabled={disabled}
                         />
                     ))
-                })}
+                ))}
             </div>
 
-            {winner ? (<div>Winner: {winner}</div>) : null}
+            {winner && <div>Winner: {winner}</div>}
         </>
     );
 };
