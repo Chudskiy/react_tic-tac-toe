@@ -4,7 +4,7 @@ import Board from "./components/Board";
 function App() {
   return (
     <div>
-        <h4>Tic-tac-toe</h4>
+        <h3>Tic-tac-toe</h3>
         <Board />
     </div>
   );
